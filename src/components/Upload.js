@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone"
 import {app} from "../constants/api"
 import {PRIMARY_COLOR} from "../constants/visual"
 
-import Button from "./Button"
+import Button from "material-ui/RaisedButton"
 
 export default class Upload extends Component {
 
@@ -20,7 +20,8 @@ export default class Upload extends Component {
       reader.onload = () => {
         app.service("api/upload")
           .create({uri: reader.result})
-          .then(x => this.props.result ? this.props.result(x.id) : console.log(x.id))
+          .then(x => this.props.result ?
+            this.props.result(x.id) : console.log(x.id))
           .catch(x => console.error(x))
       }
 
@@ -34,24 +35,22 @@ export default class Upload extends Component {
     })
   }
 
-  render() {
-    return (
-      <div>
-        <Dropzone
-          onDrop={this.onDrop}
-          style={{
-            margin: this.props.margin || "auto",
-            textAlign: this.props.align || "center",
-            padding: this.props.padding,
-            width: this.props.width,
-            color: this.props.color || PRIMARY_COLOR,
-            background: this.props.background || "transparent"
-          }}
-        >
-          <Button>{this.props.text || "อัพโหลดรูป"}</Button>
-        </Dropzone>
-      </div>
-    )
-  }
+  render = () => (
+    <div>
+      <Dropzone
+        onDrop={this.onDrop}
+        style={{
+          margin: this.props.margin || "auto",
+          textAlign: this.props.align || "center",
+          padding: this.props.padding,
+          width: this.props.width,
+          color: this.props.color || PRIMARY_COLOR,
+          background: this.props.background || "transparent"
+        }}
+      >
+        <Button label={this.props.text || "Upload"} fullWidth primary />
+      </Dropzone>
+    </div>
+  )
 
 }

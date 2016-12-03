@@ -16,6 +16,7 @@ export const USER_API = `${API_URL}users`
 export const MESSAGE_API = `${API_URL}messages`
 export const GRAPHQL_API = `${API_URL}graphql`
 export const SOCKET_API = `${API_URL}socket`
+export const BEACON_API = `${API_URL}beacons`
 
 export const app = feathers()
 
@@ -49,6 +50,7 @@ const service = {}
 service[USER_API] = "user"
 // service[TRACK_API] = "track"
 service[SOCKET_API] = "socket"
+service[BEACON_API] = "beacon"
 
 export const services = reduxifyServices(app, service)
 export const servicesSSR = appInstance => (reduxifyServices(appInstance, service))

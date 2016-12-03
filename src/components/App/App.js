@@ -6,7 +6,7 @@ import emptyFunction from "fbjs/lib/emptyFunction"
 import ThemeProvider from "material-ui/styles/MuiThemeProvider"
 import getMuiTheme from "material-ui/styles/getMuiTheme"
 
-import {green100, green500, green700} from "material-ui/styles/colors"
+import {blue100, blue500, blue700} from "material-ui/styles/colors"
 
 import {setUserInfo} from "../../actions/user"
 
@@ -61,9 +61,9 @@ class App extends Component {
 
     const muiTheme = getMuiTheme({
       palette: {
-        primary1Color: green500,
-        primary2Color: green700,
-        primary3Color: green100,
+        primary1Color: blue500,
+        primary2Color: blue700,
+        primary3Color: blue100,
       },
     }, {
       avatar: {

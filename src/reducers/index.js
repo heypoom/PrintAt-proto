@@ -11,4 +11,5 @@ export default combineReducers({
   user,
   users: services.user.reducer,
   socket: services.socket.reducer,
+  beacon: services.beacon.reducer
 })

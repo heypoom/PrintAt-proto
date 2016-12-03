@@ -22,10 +22,20 @@ export default function upload() {
       hook => {
         if (!hook.data.uri && hook.params.file) {
           const file = hook.params.file
-          hook.data = {uri: dauria.getBase64DataURI(file.buffer, file.mimetype)}
+          console.log(file.mimetype)
+          hook.data = {
+            uri: dauria.getBase64DataURI(file.buffer, file.mimetype)
+          }
         }
         if (!hook.data.uri && hook.data.file) {
-          hook.data = {uri: dauria.getBase64DataURI(file.buffer, file.mimetype)}
+          const file = hook.data.file
+          console.log(file.mimetype)
+          hook.data = {
+            uri: dauria.getBase64DataURI(file.buffer, file.mimetype)
+          }
+        }
+        if (hook.data.uri) {
+          console.log("FILE UPLOADED")
         }
       }
     ]

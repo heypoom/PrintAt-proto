@@ -264,10 +264,64 @@ export class Dashboard extends Component {
                 </span>
                 <br /><br />
                 Files Count: {this.state.files.length}&nbsp;
-                <small>({this.state.files.map(e => e.filename).join(", ")})</small>
               </h2>
+              <Button label="Print Now!" primary />
             </Paper>
-            <Button label="Print Now!" fullWidth primary />
+            <Paper className={s.card} zDepth={1}>
+              <List>
+                <Subheader inset>Folders</Subheader>
+                <ListItem
+                  leftAvatar={<Avatar icon={<FileFolder />} />}
+                  rightIcon={<ActionInfo />}
+                  primaryText="Vacation itinerary"
+                  secondaryText="Dec 20, 2016"
+                />
+                <ListItem
+                  leftAvatar={<Avatar icon={<FileFolder />} />}
+                  rightIcon={<ActionInfo />}
+                  primaryText="Kitchen remodel"
+                  secondaryText="Dec 10, 2016"
+                />
+              </List>
+              <Divider inset />
+              <List>
+                <Subheader inset>Files</Subheader>
+                  {
+                    this.state.files.length > 0 ? (
+                      this.state.files.map((item, i) => (
+                        <ListItem
+                          key={i}
+                          leftAvatar={
+                            <Avatar icon={<ActionAssignment />} backgroundColor={blue500} />
+                          }
+                          rightIcon={<ActionInfo />}
+                          primaryText={`File ${i}`}
+                          secondaryText={item.filename}
+                        />
+                      ))
+                    ) : (
+                      <ListItem
+                        leftAvatar={
+                          <Avatar icon={<ActionAssignment />} backgroundColor={deepOrange500} />
+                        }
+                        rightIcon={<EditorInsertChart />}
+                        primaryText={`No Files Yet. Please add one.`}
+                        secondaryText="No Files have been added yet. Please add one below."
+                      />
+                    )
+                  }
+                <div>
+                  <Upload align="left" result={this.onUploaded}>
+                    <ListItem
+                      leftAvatar={<Avatar icon={<NoteAdd />} backgroundColor={teal500} />}
+                      rightIcon={<ActionInfo />}
+                      primaryText={`Upload a File`}
+                      secondaryText="Upload a file"
+                    />
+                  </Upload>
+                </div>
+              </List>
+            </Paper>
           </Grid>
         </div>
       </div>

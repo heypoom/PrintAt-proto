@@ -53,8 +53,7 @@ export class Dashboard extends Component {
         queue: 452
       }, {
         queue: 453
-      }],
-      center: [0.0, 0.0]
+      }]
     }
   }
 
@@ -63,7 +62,7 @@ export class Dashboard extends Component {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
         this.setState({center: [position.coords.latitude, position.coords.longitude]})
-      }, () => console.error(true))
+      }, e => console.error(e))
     } else {
       console.error(false)
     }
@@ -132,14 +131,19 @@ export class Dashboard extends Component {
                   )
                 }
               </h2>
-              <div onClick={() => this.setState({selectedIndex: 1})} style={{textAlign: "right", marginTop: "1.2em"}}>
+              <div
+                onClick={() => this.setState({selectedIndex: 1})}
+                style={{textAlign: "right", marginTop: "1.2em"}}
+              >
                 <Button label="Confirm Printer" secondary />
               </div>
             </Paper>
           </div>
           <GoogleMap
-            apiKey="AIzaSyDZXmkfesaoAhwCwB908D48FtHaBMZGIZ8"
-            defaultCenter={[0.0, 0.0]}
+            bootstrapURLKeys={{
+              key: "AIzaSyAojk9OmB5qh6uLniC3eZ8s8LS7EqygZlg"
+            }}
+            defaultCenter={[13.7389953, 100.5885519]}
             center={this.state.center}
             defaultZoom={this.props.zoom}
             options={() => ({
@@ -172,7 +176,7 @@ export class Dashboard extends Component {
                   {this.state.currentStation.name}&nbsp;
                 </h2>
                 <div onClick={() => this.setState({selectedIndex: 2})} style={{marginTop: "1.2em"}}>
-                  <Button label="Proceed" secondary />
+                  <Button label="Proceed To Printing" secondary />
                 </div>
               </Paper>
             </div>
@@ -246,17 +250,21 @@ export class Dashboard extends Component {
         <div style={{display: this.state.selectedIndex === 2 ? "block" : "none"}}>
           <Grid style={{paddingTop: "1em"}} c>
             <Paper className={s.card} zDepth={1}>
-              <h2>Current Queue: 6</h2>
+              <h2 style={{margin: 0}}>
+                Queue Information
+              </h2>
+              <h2 style={{color: "#7f8c8d"}}>
+                Currently Printing At: {this.state.currentStation.name}
+                  ({this.state.currentStation.lat}, {this.state.currentStation.lng})
+                <br />
+                Files Count: {this.state.files.length} ({this.state.files.map(e => e.filename).join(", ")})
+              </h2>
             </Paper>
-            <div>
-              {
-                this.state.queues.map((item, i) => (
-                  <Paper key={i} className={s.card} zDepth={1}>
-                    {item.queue}
-                  </Paper>
-                ))
-              }
-            </div>
+            <Paper className={s.card} zDepth={1}>
+              <h2 style={{margin: 0}}>
+                Queue: 1. <br />
+              </h2>
+            </Paper>
           </Grid>
         </div>
       </div>

@@ -1,0 +1,17 @@
+{
+  "name": "PrintAt-proto",
+  "version": "0.1.0",
+  "description": "PrintAt Prototype",
+  "main": "index.js",
+  "repository": {
+    "url": "https://github.com/phoomparin/PrintAt-proto.git",
+    "type": "git"
+  },
+  "author": "Pmc Dev <phoomparin@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "feathers": "^2.0.2",
+    "feathers-rest": "^1.5.2",
+    "feathers-socketio": "^1.4.2"
+  }
+}

@@ -36,6 +36,7 @@
     "feathers-sync": "^0.1.1",
     "front-matter": "2.1.0",
     "fs-blob-store": "^5.2.1",
+    "google-map-react": "^0.22.0",
     "helmet": "^2.1.1",
     "history": "^3.0.0",
     "immutable": "^3.8.1",

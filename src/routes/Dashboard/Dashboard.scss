@@ -20,3 +20,14 @@
     min-width 0.35s ease-in-out,
     min-height 0.35s ease-in-out;
 }
+
+.animSlideIn {
+  animation-name: cardInsertedAnim;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.8s;
+  transition: transform 0.85s cubic-bezier(0.68, 0.01, 0.245, 1.13) 0.35s,
+    color 0.3s ease-in-out 0.25s,
+    min-width 0.35s ease-in-out,
+    min-height 0.35s ease-in-out;
+}

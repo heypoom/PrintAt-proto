@@ -14,19 +14,24 @@ import {BottomNavigation, BottomNavigationItem} from "material-ui/BottomNavigati
 import Upload from "../../components/Upload"
 import Grid from "../../components/Grid"
 
+import GoogleMap from "google-map-react"
+
+import {services, app, BEACON_API} from "../../constants/api"
+
 import s from "./Dashboard.scss"
 
 export class Dashboard extends Component {
+
+  static defaultProps = {
+    center: [59.938043, 30.337157],
+    zoom: 9,
+    greatPlaceCoords: {lat: 59.724465, lng: 30.080121}
+  }
 
   constructor(props) {
     super(props)
     this.state = {
       selectedIndex: 0,
-      stations: [{
-        name: "Allahu Akbar"
-      }, {
-        name: "Allahu Snackbar"
-      }],
       files: [{
         filename: "9fjaw9ifjw90ajf09waj.pdf"
       }],
@@ -36,7 +41,19 @@ export class Dashboard extends Component {
         queue: 452
       }, {
         queue: 453
-      }]
+      }],
+      center: [0.0, 0.0]
+    }
+  }
+
+  componentDidMount = () => {
+    app.service(BEACON_API).on("created", () => this.props.findBeacons())
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        this.setState({center: [position.coords.latitude, position.coords.longitude]})
+      }, () => console.error(true))
+    } else {
+      console.error(false)
     }
   }
 
@@ -58,30 +75,48 @@ export class Dashboard extends Component {
           </IconButton>
         }
       />
-      <Grid style={{paddingTop: "1.5em"}} c>
-        <div style={{display: this.state.selectedIndex === 0 ? "block" : "none"}}>
-          {
-            this.state.stations.map((item, i) => (
-              <Paper key={i} className={s.card} zDepth={1}>
-                {item.name}
-              </Paper>
-            ))
-          }
+      <div>
+        <div
+          style={{
+            display: this.state.selectedIndex === 0 ? "block" : "none",
+            overflow: "hidden"
+          }}
+        >
+          <GoogleMap
+            apiKey="AIzaSyDZXmkfesaoAhwCwB908D48FtHaBMZGIZ8"
+            defaultCenter={[0.0, 0.0]}
+            center={this.state.center}
+            defaultZoom={this.props.zoom}
+            options={() => ({
+              gestureHandling: "greedy"
+            })}
+          >
+            {
+              this.props.beacon ?
+                this.props.beacon.data.map((item, i) => (
+                  <div key={i} lat={item.lat || 0.0} lng={item.lng || 0.0}>{item.name}</div>
+              )) : null
+            }
+          </GoogleMap>
         </div>
         <div style={{display: this.state.selectedIndex === 1 ? "block" : "none"}}>
-          <div>
-            {
-              this.state.files.map((item, i) => (
-                <Paper key={i} className={s.card} zDepth={1}>
-                  File Name: {item.filename}
-                </Paper>
-              ))
-            }
-          </div>
-          <Upload result={this.onUploaded} />
+          <Grid style={{paddingTop: "1.5em"}} c>
+            <div>
+              {
+                this.state.files.map((item, i) => (
+                  <Paper key={i} className={s.card} zDepth={1}>
+                    File Name: {item.filename}
+                  </Paper>
+                ))
+              }
+            </div>
+            <div className={s.animSlideIn}>
+              <Upload result={this.onUploaded} />
+            </div>
+          </Grid>
         </div>
         <div style={{display: this.state.selectedIndex === 2 ? "block" : "none"}}>
-          <div>
+          <Grid style={{paddingTop: "1.5em"}} c>
             <Paper className={s.card} zDepth={1}>
               <h2>Current Queue: 6</h2>
             </Paper>
@@ -94,9 +129,9 @@ export class Dashboard extends Component {
                 ))
               }
             </div>
-          </div>
+          </Grid>
         </div>
-      </Grid>
+      </div>
       <div
         style={{
           position: "absolute",
@@ -130,11 +165,13 @@ export class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  beacon: state.beacon.queryResult
 })
 
 const mapDispatchToProps = dispatch => ({
-  dispatch: dispatch
+  dispatch: dispatch,
+  findBeacons: dispatch(services.beacon.find())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(s)(Dashboard))

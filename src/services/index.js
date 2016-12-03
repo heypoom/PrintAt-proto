@@ -6,7 +6,7 @@ import {IS_PROD} from "../constants/util"
 
 import authentication from "./authentication"
 import debug from "./debug"
-import messages from "./messages"
+import beacons from "./beacons"
 import users from "./users"
 import socket from "./socket"
 import upload from "./upload"
@@ -20,7 +20,7 @@ export default function services() {
   }
 
   this.configure(authentication)
-  this.configure(messages)
+  this.configure(beacons)
   this.configure(users)
   this.configure(upload)
   this.configure(socket)

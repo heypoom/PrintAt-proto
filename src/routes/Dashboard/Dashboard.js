@@ -188,13 +188,13 @@ export class Dashboard extends Component {
                     leftAvatar={<Avatar icon={<FileFolder />} />}
                     rightIcon={<ActionInfo />}
                     primaryText="Vacation itinerary"
-                    secondaryText="Jan 20, 2014"
+                    secondaryText="Dec 20, 2016"
                   />
                   <ListItem
                     leftAvatar={<Avatar icon={<FileFolder />} />}
                     rightIcon={<ActionInfo />}
                     primaryText="Kitchen remodel"
-                    secondaryText="Jan 10, 2014"
+                    secondaryText="Dec 10, 2016"
                   />
                 </List>
                 <Divider inset />
@@ -254,17 +254,19 @@ export class Dashboard extends Component {
                 Queue Information
               </h2>
               <h2 style={{color: "#7f8c8d"}}>
-                Currently Printing At: {this.state.currentStation.name}
+                Currently Printing At:&nbsp;
+                <span style={{color: "black"}}>
+                  {this.state.currentStation.name}
+                </span>&nbsp;
+                <span>
                   ({this.state.currentStation.lat}, {this.state.currentStation.lng})
-                <br />
-                Files Count: {this.state.files.length} ({this.state.files.map(e => e.filename).join(", ")})
+                </span>
+                <br /><br />
+                Files Count: {this.state.files.length}&nbsp;
+                <small>({this.state.files.map(e => e.filename).join(", ")})</small>
               </h2>
             </Paper>
-            <Paper className={s.card} zDepth={1}>
-              <h2 style={{margin: 0}}>
-                Queue: 1. <br />
-              </h2>
-            </Paper>
+            <Button label="Print Now!" fullWidth primary />
           </Grid>
         </div>
       </div>

@@ -77,6 +77,7 @@ export class Dashboard extends Component {
   onUploaded = id => {
     const files = this.state.files
     files.push({filename: id})
+    swal("Upload Finished", "Upload Success", "success")
     this.setState({files: files})
   }
 

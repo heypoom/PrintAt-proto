@@ -48,7 +48,8 @@ export default class Upload extends Component {
           background: this.props.background || "transparent"
         }}
       >
-        <Button label={this.props.text || "Upload"} fullWidth primary />
+        {this.props.children ? this.props.children :
+          <Button label={this.props.text || "Upload"} fullWidth primary />}
       </Dropzone>
     </div>
   )

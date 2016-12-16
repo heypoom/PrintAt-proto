@@ -17,15 +17,12 @@ export const MESSAGE_API = `${API_URL}messages`
 export const GRAPHQL_API = `${API_URL}graphql`
 export const SOCKET_API = `${API_URL}socket`
 export const BEACON_API = `${API_URL}beacons`
+export const PRINT_API = `${API_URL}print`
 
 export const app = feathers()
 
-const devSocketURL = `http://${IS_CLIENT ? window.location.hostname : ""}:3000`
-const prodSocketURL = IS_CLIENT ? window.location.origin : ""
-
-const socketURL = IS_DEV ? devSocketURL : prodSocketURL
 const socket = io(
-  IS_CLIENT ? socketURL : "", {
+  IS_CLIENT ? window.location.origin : "", {
     transports: ["websocket"]
   }
 )
@@ -48,9 +45,11 @@ if (cookieStorage.getItem(TOKEN_KEY)) {
 
 const service = {}
 service[USER_API] = "user"
-// service[TRACK_API] = "track"
 service[SOCKET_API] = "socket"
 service[BEACON_API] = "beacon"
+service[PRINT_API] = "print"
+
+// service[TRACK_API] = "track"
 
 export const services = reduxifyServices(app, service)
 export const servicesSSR = appInstance => (reduxifyServices(appInstance, service))

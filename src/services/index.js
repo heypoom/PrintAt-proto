@@ -10,6 +10,7 @@ import beacons from "./beacons"
 import users from "./users"
 import socket from "./socket"
 import upload from "./upload"
+import print from "./print"
 
 export default function services() {
   mongoose.connect(DATABASE_URL)
@@ -23,6 +24,7 @@ export default function services() {
   this.configure(beacons)
   this.configure(users)
   this.configure(upload)
+  this.configure(print)
   this.configure(socket)
   this.configure(debug)
 }

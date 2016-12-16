@@ -4,6 +4,10 @@ export const APP_TITLE = "FlipED™"
 export const TOKEN_KEY = "feathers-jwt"
 export const SEGMENT_API_KEY = "inYx5crWKP9gKRgehuRMlXH3hS8MjENa"
 
+export const MapsAPIKey = {
+  key: "AIzaSyCZKH7D38nqliKePHV4f3f04piW4p_taUo"
+}
+
 export const ROLE = {
   none: {
     perm: -1,

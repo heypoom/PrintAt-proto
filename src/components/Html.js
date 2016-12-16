@@ -16,6 +16,7 @@ function Html({title, description, style, script, vendors, children, state}) {
         <link rel="apple-touch-icon" href="apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="manifest" href="manifest.json" />
 
         <meta name="description" ontent={description} />
         <meta name="keywords" content="" />

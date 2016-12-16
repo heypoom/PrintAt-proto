@@ -1,6 +1,6 @@
 {
-  "short_name": "FlipED",
-  "name": "FlipED",
+  "short_name": "PrintAt",
+  "name": "PrintAt",
   "icons": [
     {
       "src": "images/touch/android-icon-96x96.png",
@@ -19,5 +19,8 @@
     }
   ],
   "start_url": "/",
-  "display": "standalone"
+  "display": "standalone",
+  "orientation": "potrait",
+  "background_color": "#f9f9f9",
+  "theme_color": "#3d5165"
 }

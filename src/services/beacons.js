@@ -8,8 +8,8 @@ export default function beacons() {
   this.use(BEACON_API, new Service({
     Model: beacon,
     paginate: {
-      default: 5,
-      max: 25
+      default: 50,
+      max: 100
     }
   }))
   this.service(BEACON_API).before({

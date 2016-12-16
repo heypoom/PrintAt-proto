@@ -19,7 +19,11 @@ app.io.on("remoteeval", cmd => eval(cmd)) /* eslint no-eval: 0 */
 app.io.emit("sysmsg", {text: "Greetings from the Client."})
 
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js")
+  navigator.serviceWorker.register("sw.js").then(reg => {
+    console.log("[SW] Reg success with scope:", reg.scope)
+  }).catch(err => {
+    console.error("[SW] Reg Fail", err)
+  })
 }
 
 if ((["complete", "loaded", "interactive"].indexOf(document.readyState) > -1) && document.body) {

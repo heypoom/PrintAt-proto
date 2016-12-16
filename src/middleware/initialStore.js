@@ -7,6 +7,7 @@ import {servicesSSR, USER_API} from "../constants/api"
 
 import {setRuntimeVariable} from "../actions/runtime"
 import {setUserInfo} from "../actions/user"
+import {setSection, setStation, addFile} from "../actions/app"
 
 import configureStore from "../store/configureStore"
 
@@ -36,6 +37,8 @@ const initialStore = async i => {
     // console.error(err)
     store.dispatch(setUserInfo({}))
   }
+
+  store.dispatch(setSection(0))
 
   store.dispatch(setRuntimeVariable({
     name: "route",
